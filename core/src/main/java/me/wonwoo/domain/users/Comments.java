@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -28,12 +29,15 @@ public class Comments {
   private String author;
 
   @Column(name = "COMMENT_AUTHOR_EMAIL")
+  @Size(max = 100)
   private String authorEmail;
 
   @Column(name = "COMMENT_AUTHOR_URL")
+  @Size(max = 200)
   private String authorUrl;
 
   @Column(name = "COMMENT_AUTHOR_IP")
+  @Size(max = 100)
   private String authorIp;
 
   @Column(name = "COMMENT_DATE")
@@ -52,12 +56,15 @@ public class Comments {
   private Integer karma;
 
   @Column(name = "COMMENT_APPROVED")
+  @Size(max = 20)
   private String approved;
 
   @Column(name = "COMMENT_AGENT")
+  @Size(max = 255)
   private String agent;
 
   @Column(name = "comment_type")
+  @Size(max = 20)
   private String type;
 
   @Column(name = "COMMENT_PARENT")

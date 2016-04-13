@@ -2,10 +2,10 @@ package me.wonwoo.domain.users;
 
 import lombok.Data;
 import lombok.ToString;
+import me.wonwoo.domain.posts.Posts;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,7 +16,7 @@ import java.util.List;
  */
 @Entity
 @Data
-@ToString(exclude = {"userMeta", "comments"})
+@ToString(exclude = {"userMeta", "comments", "posts"})
 public class Users {
 
   @Id
@@ -63,4 +63,6 @@ public class Users {
   @OneToMany(fetch = FetchType.LAZY, mappedBy = "users")
   private List<Comments> comments = new ArrayList<>();
 
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "author")
+  private List<Posts> posts = new ArrayList<>();
 }

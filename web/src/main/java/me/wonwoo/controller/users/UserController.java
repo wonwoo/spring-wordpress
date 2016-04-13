@@ -1,16 +1,16 @@
 package me.wonwoo.controller.users;
 
 import lombok.extern.slf4j.Slf4j;
+import me.wonwoo.config.annotation.RestControllerOk;
 import me.wonwoo.domain.users.Users;
 import me.wonwoo.exception.BadRequestException;
-import me.wonwoo.repository.UserRepository;
-import me.wonwoo.service.UserService;
+import me.wonwoo.repository.users.UserRepository;
+import me.wonwoo.service.users.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.response.success.ResponseStatusCreated;
 import org.springframework.http.response.success.ResponseStatusNoContent;
-import org.springframework.http.response.success.ResponseStatusOk;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,8 +19,7 @@ import javax.validation.Valid;
 /**
  * Created by wonwoo on 2016. 4. 12..
  */
-@RestController
-@ResponseStatusOk
+@RestControllerOk
 @Slf4j
 public class UserController {
 
@@ -31,14 +30,14 @@ public class UserController {
   private UserService userService;
 
   @GetMapping("/users")
-  public Page<Users> getUsers(Pageable pageable) {
+  public Page<Users> findUsers(Pageable pageable) {
     Page<Users> users = userRepository.findAll(pageable);
     users.getContent().stream().map(x -> x.toString()).forEach(log::info);
     return users;
   }
 
   @GetMapping("/users/{id}")
-  public Users getUser(@PathVariable Long id) {
+  public Users findUser(@PathVariable Long id) {
     return userService.findUser(id);
   }
 

@@ -1,8 +1,10 @@
 package me.wonwoo.domain.posts;
 
 import lombok.Data;
+import me.wonwoo.domain.users.Users;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 import static javafx.scene.input.KeyCode.T;
@@ -18,8 +20,9 @@ public class Posts {
   @GeneratedValue
   private Long id;
 
-  @Column(name = "POST_AUTHOR")
-  private Long author;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "POST_AUTHOR")
+  private Users author;
 
   @Column(name = "POST_DATE")
   @Temporal(TemporalType.TIMESTAMP)
@@ -39,18 +42,23 @@ public class Posts {
   private String excerpt;
 
   @Column(name = "POST_STATUS")
+  @Size(max = 20)
   private String status;
 
   @Column(name = "COMMENT_STATUS")
+  @Size(max = 20)
   private String commentStatus;
 
   @Column(name = "PING_STATUS")
+  @Size(max = 20)
   private String pingStatus;
 
   @Column(name = "POST_PASSWORD")
+  @Size(max = 20)
   private String password;
 
   @Column(name = "POST_NAME")
+  @Size(max = 200)
   private String name;
 
   @Column(name = "TO_PING", columnDefinition = "text")
@@ -74,15 +82,18 @@ public class Posts {
   private Long parent;
 
   @Column(name = "GUID")
+  @Size(max = 255)
   private String guid;
 
   @Column(name = "MENU_ORDER")
   private Integer menuOrder;
 
   @Column(name = "POST_TYPE")
+  @Size(max = 20)
   private String postType;
 
   @Column(name = "POST_MIME_TYPE")
+  @Size(max = 100)
   private String mimeType;
 
   @Column(name = "COMMENT_COUNT")

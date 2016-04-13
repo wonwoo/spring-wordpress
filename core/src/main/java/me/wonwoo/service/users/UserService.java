@@ -1,8 +1,8 @@
-package me.wonwoo.service;
+package me.wonwoo.service.users;
 
 import me.wonwoo.domain.users.Users;
 import me.wonwoo.exception.IdNotFoundException;
-import me.wonwoo.repository.UserRepository;
+import me.wonwoo.repository.users.UserRepository;
 import me.wonwoo.utils.ReflectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -49,10 +49,10 @@ public class UserService {
     }
     ReflectionUtils.oldInstanceBynewInstance(oldUsers, user);
     return oldUsers;
-
   }
 
   public void delete(Long id){
+    getUser(id);
     userRepository.delete(id);
   }
 }

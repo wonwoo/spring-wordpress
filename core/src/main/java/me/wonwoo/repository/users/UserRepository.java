@@ -1,4 +1,4 @@
-package me.wonwoo.repository;
+package me.wonwoo.repository.users;
 
 import me.wonwoo.domain.users.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
