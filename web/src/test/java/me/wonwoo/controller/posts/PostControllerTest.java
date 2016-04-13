@@ -2,8 +2,10 @@ package me.wonwoo.controller.posts;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import me.wonwoo.Application;
+import me.wonwoo.domain.posts.enumerated.CommentStatus;
+import me.wonwoo.domain.posts.enumerated.PostStatus;
 import me.wonwoo.domain.posts.Posts;
-import me.wonwoo.domain.users.Users;
+import me.wonwoo.domain.posts.enumerated.PostType;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -20,7 +22,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -64,6 +65,9 @@ public class PostControllerTest {
       .andDo(print())
       .andExpect(status().isOk())
       .andExpect(jsonPath("$.content.[0].content", is("post content")))
+      .andExpect(jsonPath("$.content.[0].postStatus", is("PUBLISH")))
+      .andExpect(jsonPath("$.content.[0].postType", is("POST")))
+      .andExpect(jsonPath("$.content.[0].commentStatus", is("OPEN")))
       .andExpect(jsonPath("$.content.[0].title", is("title")));
   }
 
@@ -103,12 +107,13 @@ public class PostControllerTest {
       .andExpect(status().isNoContent());
   }
 
-
   private Posts getPostsDomain() {
     Posts posts = new Posts();
     posts.setContent("post content");
     posts.setTitle("title");
-    Users user = new Users();
+    posts.setPostStatus(PostStatus.PUBLISH);
+    posts.setPostType(PostType.POST);
+    posts.setCommentStatus(CommentStatus.OPEN);
     return posts;
   }
 

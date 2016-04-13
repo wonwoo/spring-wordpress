@@ -1,13 +1,14 @@
 package me.wonwoo.domain.posts;
 
 import lombok.Data;
+import me.wonwoo.domain.posts.enumerated.CommentStatus;
+import me.wonwoo.domain.posts.enumerated.PostStatus;
+import me.wonwoo.domain.posts.enumerated.PostType;
 import me.wonwoo.domain.users.Users;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Date;
-
-import static javafx.scene.input.KeyCode.T;
 
 /**
  * Created by wonwoo on 2016. 4. 13..
@@ -41,13 +42,13 @@ public class Posts {
   @Column(name = "POST_EXCERPT", columnDefinition = "text")
   private String excerpt;
 
-  @Column(name = "POST_STATUS")
-  @Size(max = 20)
-  private String status;
+  @Column(name = "POST_STATUS", length = 20)
+  @Enumerated(EnumType.STRING)
+  private PostStatus postStatus;
 
-  @Column(name = "COMMENT_STATUS")
-  @Size(max = 20)
-  private String commentStatus;
+  @Column(name = "COMMENT_STATUS", length = 20)
+  @Enumerated(EnumType.STRING)
+  private CommentStatus commentStatus;
 
   @Column(name = "PING_STATUS")
   @Size(max = 20)
@@ -88,9 +89,9 @@ public class Posts {
   @Column(name = "MENU_ORDER")
   private Integer menuOrder;
 
-  @Column(name = "POST_TYPE")
-  @Size(max = 20)
-  private String postType;
+  @Column(name = "POST_TYPE", length = 20)
+  @Enumerated(EnumType.STRING)
+  private PostType postType;
 
   @Column(name = "POST_MIME_TYPE")
   @Size(max = 100)
@@ -98,6 +99,4 @@ public class Posts {
 
   @Column(name = "COMMENT_COUNT")
   private Long commentCount;
-
-
 }
