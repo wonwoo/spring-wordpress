@@ -24,7 +24,6 @@ public class UserMeta {
   @Column(name = "META_KEY")
   private String metaKey;
 
-  //TODO 다시 확인
   @Column(name = "META_VALUE")
   @Lob
   private String metaValue;

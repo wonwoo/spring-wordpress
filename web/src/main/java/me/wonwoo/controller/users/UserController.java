@@ -64,4 +64,8 @@ public class UserController {
     userService.delete(id);
   }
 
+  //TODO 일단 이것만
+  //화면 어떤거 react? thymeleaf? 결정
+  //클라이언트 셋팅
+  //entity 다시 확인
 }
