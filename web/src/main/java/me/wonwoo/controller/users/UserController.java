@@ -68,4 +68,5 @@ public class UserController {
   //화면 어떤거 react? thymeleaf? 결정
   //클라이언트 셋팅
   //entity 다시 확인
+  //스프링 시큐리티 적용
 }
